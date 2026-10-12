@@ -95,7 +95,6 @@ import { PanVerification } from "@/pages/tax/PanVerification"
 import { TracesIntegration } from "@/pages/tax/TracesIntegration"
 import { JustificationReports } from "@/pages/tax/JustificationReports"
 import { Contacts } from "@/pages/contacts/Contacts"
-import { Groups } from "@/pages/contacts/Groups"
 import { SupplierDetail } from "@/pages/contacts/SupplierDetail"
 
 import { Settings } from "@/pages/settings/Settings"
@@ -225,11 +224,11 @@ function App() {
         <Route path="/tax/reports" element={<ComingSoon title="Tax Reports" crumbs={[{ label: "Tax", href: "/tax" }, { label: "Tax Reports" }]} />} />
 
         <Route path="/contacts" element={<Contacts />} />
-        <Route path="/contacts/customers" element={<Customers />} />
+        <Route path="/contacts/customers" element={<Contacts />} />
         <Route path="/contacts/suppliers" element={<Contacts />} />
         <Route path="/contacts/suppliers/:id" element={<SupplierDetail />} />
-        <Route path="/contacts/employees" element={<Employees />} />
-        <Route path="/contacts/groups" element={<Groups />} />
+        <Route path="/contacts/employees" element={<Contacts />} />
+        <Route path="/contacts/groups" element={<Contacts />} />
 
         <Route path="/files" element={<ComingSoon title="Files" crumbs={[{ label: "Files" }]} />} />
 

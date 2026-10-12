@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { Users, UserCheck, Truck, Briefcase, Layers, Upload, Plus, Search, SlidersHorizontal } from "lucide-react"
 
 import { PageHeader } from "@/components/shared/PageHeader"
@@ -15,6 +15,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { DialogTrigger } from "@/components/ui/dialog"
 import { NewContactDialog } from "@/components/shared/EntityDialogs"
 import { maskEmail, maskPhone } from "@/lib/format"
+import { GroupsPanel } from "@/pages/contacts/Groups"
 
 const contacts = [
   { id: "CUST-1001", name: "ABC Technologies Pvt. Ltd.", type: "Customer", email: "accounts@abctech.com", phone: "+91 98765 43210", outstanding: 125430, status: "Active", href: null },
@@ -35,17 +36,21 @@ function initials(name: string) {
   return name.split(" ").slice(0, 2).map((w) => w[0]).join("").toUpperCase()
 }
 
+// Each tab has its own URL so the sidebar links and deep links land on the
+// right tab, but every tab renders inside this same page — only the content
+// under the tab bar changes.
 const contactTabs = [
-  { value: "all", label: "All Contacts" },
-  { value: "customers", label: "Customers" },
-  { value: "suppliers", label: "Suppliers" },
-  { value: "employees", label: "Employees" },
-  { value: "groups", label: "Groups" },
+  { value: "all", label: "All Contacts", href: "/contacts" },
+  { value: "customers", label: "Customers", href: "/contacts/customers" },
+  { value: "suppliers", label: "Suppliers", href: "/contacts/suppliers" },
+  { value: "employees", label: "Employees", href: "/contacts/employees" },
+  { value: "groups", label: "Groups", href: "/contacts/groups" },
 ] as const
 
 export function Contacts() {
   const navigate = useNavigate()
-  const [tab, setTab] = useState<(typeof contactTabs)[number]["value"]>("all")
+  const { pathname } = useLocation()
+  const tab = (contactTabs.find((t) => t.href === pathname) ?? contactTabs[0]).value
   const [query, setQuery] = useState("")
 
   const filtered = useMemo(() => {
@@ -65,7 +70,7 @@ export function Contacts() {
   return (
     <div>
       <PageHeader
-        crumbs={[{ label: "Contacts" }]}
+        crumbs={[{ label: "Contacts", href: "/contacts" }, { label: contactTabs.find((t) => t.value === tab)!.label }]}
         title="Contacts"
         description="Manage customers, suppliers, employees and all your business contacts."
         actions={
@@ -90,13 +95,7 @@ export function Contacts() {
 
       <Card>
         <CardContent className="pt-5">
-          <Tabs
-            value={tab}
-            onValueChange={(v) => {
-              if (v === "groups") navigate("/contacts/groups")
-              else setTab(v as typeof tab)
-            }}
-          >
+          <Tabs value={tab} onValueChange={(v) => navigate(contactTabs.find((t) => t.value === v)!.href)}>
             <TabsList>
               {contactTabs.map((t) => (
                 <TabsTrigger key={t.value} value={t.value}>{t.label}</TabsTrigger>
@@ -104,6 +103,7 @@ export function Contacts() {
             </TabsList>
           </Tabs>
 
+          {tab === "groups" ? <GroupsPanel /> : <>
           <div className="mt-4 mb-3 flex flex-col gap-2 sm:flex-row sm:items-center">
             <div className="relative max-w-sm flex-1">
               <Search className="text-muted-foreground absolute top-1/2 left-3 size-4 -translate-y-1/2" />
@@ -151,6 +151,7 @@ export function Contacts() {
           </Table>
 
           <div className="text-muted-foreground mt-4 text-sm">Showing {filtered.length} of {contacts.length} contacts</div>
+          </>}
         </CardContent>
       </Card>
     </div>
