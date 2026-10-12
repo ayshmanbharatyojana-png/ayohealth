@@ -1,9 +1,7 @@
 import { Users, UserCheck, Clock, ShieldCheck, Search, ChevronDown, MoreVertical } from "lucide-react"
 
-import { PageHeader } from "@/components/shared/PageHeader"
 import { StatCard } from "@/components/shared/StatCard"
-import { SettingsTabs } from "@/components/shared/SettingsTabs"
-import { Card, CardContent } from "@/components/ui/card"
+import { SettingsLayout } from "@/components/shared/SettingsLayout"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
@@ -40,24 +38,13 @@ function initials(name: string) {
 
 export function UsersRoles() {
   return (
-    <div>
-      <PageHeader
-        crumbs={[{ label: "Settings", href: "/settings" }, { label: "Users & Roles" }]}
-        title="Users & Roles"
-        description="Manage users, roles, permissions and access levels."
-        actions={<Button>+ Invite User</Button>}
-      />
-
-      <div className="mb-5"><SettingsTabs active="users" /></div>
-
-      <div className="mb-5 grid grid-cols-2 gap-3 lg:grid-cols-4">
+    <SettingsLayout active="users" toolbar={<Button>+ Invite User</Button>}>
+      <div className="mb-5 grid grid-cols-2 gap-3 2xl:grid-cols-4">
         {stats.map((s) => (
           <StatCard key={s.label} icon={s.icon} label={s.label} value={s.value} color={s.color} />
         ))}
       </div>
 
-      <Card>
-        <CardContent className="pt-5">
           <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center">
             <div className="relative max-w-sm flex-1">
               <Search className="text-muted-foreground absolute top-1/2 left-3 size-4 -translate-y-1/2" />
@@ -99,8 +86,6 @@ export function UsersRoles() {
               </tbody>
             </table>
           </div>
-        </CardContent>
-      </Card>
-    </div>
+    </SettingsLayout>
   )
 }

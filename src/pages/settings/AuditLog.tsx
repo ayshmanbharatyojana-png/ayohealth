@@ -1,8 +1,6 @@
 import { Search, ChevronDown, Filter, Calendar, Download } from "lucide-react"
 
-import { PageHeader } from "@/components/shared/PageHeader"
-import { SettingsTabs } from "@/components/shared/SettingsTabs"
-import { Card, CardContent } from "@/components/ui/card"
+import { SettingsLayout } from "@/components/shared/SettingsLayout"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
@@ -27,18 +25,7 @@ const logs = [
 
 export function AuditLog() {
   return (
-    <div>
-      <PageHeader
-        crumbs={[{ label: "Settings", href: "/settings" }, { label: "Audit Log" }]}
-        title="Audit Log"
-        description="View all system activities, changes and user actions."
-        actions={<Button variant="outline"><Download className="size-4" /> Export</Button>}
-      />
-
-      <div className="mb-5"><SettingsTabs active="audit" /></div>
-
-      <Card>
-        <CardContent className="pt-5">
+    <SettingsLayout active="audit" toolbar={<Button variant="outline"><Download className="size-4" /> Export</Button>}>
           <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center">
             <div className="relative max-w-sm flex-1">
               <Search className="text-muted-foreground absolute top-1/2 left-3 size-4 -translate-y-1/2" />
@@ -87,8 +74,6 @@ export function AuditLog() {
               ))}
             </div>
           </div>
-        </CardContent>
-      </Card>
-    </div>
+    </SettingsLayout>
   )
 }
