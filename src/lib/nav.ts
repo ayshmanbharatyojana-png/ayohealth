@@ -31,9 +31,9 @@ export interface NavItem {
 }
 
 export const navItems: NavItem[] = [
-  { label: "Dashboard", href: "/", icon: LayoutDashboard },
+  { label: "1.Dashboard", href: "/", icon: LayoutDashboard },
   {
-    label: "Accounting",
+    label: "2.Accounting",
     href: "/accounting",
     icon: Calculator,
     children: [
@@ -42,7 +42,7 @@ export const navItems: NavItem[] = [
     ],
   },
   {
-    label: "Sales",
+    label: "3.Sales",
     href: "/sales",
     icon: ShoppingBag,
     children: [
@@ -55,7 +55,7 @@ export const navItems: NavItem[] = [
     ],
   },
   {
-    label: "Purchases",
+    label: "4.Purchases",
     href: "/purchases",
     icon: ShoppingCart,
     children: [
@@ -68,7 +68,7 @@ export const navItems: NavItem[] = [
     ],
   },
   {
-    label: "Banking",
+    label: "5.Banking",
     href: "/banking",
     icon: Landmark,
     children: [
@@ -80,7 +80,7 @@ export const navItems: NavItem[] = [
     ],
   },
   {
-    label: "Expenses",
+    label: "6.Expenses",
     href: "/expenses",
     icon: Receipt,
     children: [
@@ -92,7 +92,7 @@ export const navItems: NavItem[] = [
     ],
   },
   {
-    label: "Payroll",
+    label: "7.Payroll",
     href: "/payroll",
     icon: Users,
     children: [
@@ -104,7 +104,7 @@ export const navItems: NavItem[] = [
     ],
   },
   {
-    label: "Inventory",
+    label: "8.Inventory",
     href: "/inventory",
     icon: Package,
     children: [
@@ -119,7 +119,7 @@ export const navItems: NavItem[] = [
     ],
   },
   {
-    label: "Projects",
+    label: "9.Projects",
     href: "/projects",
     icon: FolderKanban,
     children: [
@@ -135,7 +135,7 @@ export const navItems: NavItem[] = [
     ],
   },
   {
-    label: "Reports",
+    label: "10.Reports",
     href: "/reports",
     icon: BarChart3,
     children: [
@@ -153,7 +153,7 @@ export const navItems: NavItem[] = [
     ],
   },
   {
-    label: "Tax",
+    label: "11.Tax",
     href: "/tax",
     icon: Percent,
     children: [
@@ -196,7 +196,7 @@ export const navItems: NavItem[] = [
     ],
   },
   {
-    label: "Contacts",
+    label: "12.Contacts",
     href: "/contacts",
     icon: Contact,
     children: [
